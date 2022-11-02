@@ -1,0 +1,6 @@
+<!-- <div **ngFor="let post of posts">
+   <app-post-body ></app-post-body>
+</div> -->
+<div *ngFor="let post of posts">
+   <app-post-body [post] = "post"></app-post-body>
+</div>

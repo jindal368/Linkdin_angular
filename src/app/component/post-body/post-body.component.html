@@ -1,0 +1,115 @@
+
+        <div class=' mt-2  flex flex-col border-dashed bg-white m-4 rounded-md'>
+
+            <div class='flex flex-row justify-between border-b-2 p-1'>
+                
+                <div *ngIf="post.like.length" class='flex flex-row pl-4 pt-3 space-x-2' >
+                    <img [src]="post.like[0].photo" alt='dp' class='h-7 w-7 rounded-full flex-start' />
+                    <p class='text-xs pt-1'><span class='font-bold'>{{post?.like[0]?.name}}</span> likes this</p>
+                </div>
+
+                <!-- <DotsHorizontalIcon class='text-gray-500 justify-between h-7 w-7 flex flex-row mt-2 mr-3' /> -->
+                <hero-icon name="dots-horizontal" hostDisplay="inlineBlock" type="outline" class="text-gray-500 justify-between h-7 w-7 flex flex-row mt-2 mr-3"></hero-icon>
+                
+            </div>
+            <div class='flex flex-row justify-between'>
+
+                <div class='flex flex-row'>
+
+                    <img [src]="post.profileImg" alt='dp' class='h-14 w-14 rounded-full flex-start m-3' />
+
+                    <div class='flex flex-col'>
+                        <div class='flex flex-row space-x-1 h-6 mt-4'>
+                            <p class='h-auto  font-bold'>{{post.name}}</p>
+                            <p class='text-gray-500 -mt-1'>.</p>
+                            <p class='text-gray-500'>{{postTimeLine(post.createdAt)}}</p>
+                        </div>
+
+                        <p class='h-auto text-gray-500  text-xs'>{{post.designation}}</p>
+                        <p class='text-gray-500 text-sm'>1h</p>
+
+                    </div>
+                </div>
+                <div class='flex flex-row text-blue-600 space-x-2 font-bold p-6 '>
+                    <!-- <PlusIcon class='text-blue-500 justify-between h-7 w-7' /> -->
+                    <hero-icon name="plus" hostDisplay="inlineBlock" type="outline" class="text-blue-500 justify-between h-7 w-7"></hero-icon>
+                    <p>Follow</p>
+                </div>
+            </div>
+
+
+            <p class='text-sm leading-relaxed p-3'>{{post.text}}</p>
+
+            
+            <img [src]="post.image" alt="Source" class='h-72 w-full mt-3' />
+
+            <div class='flex flex-row justify-between'>
+                <div class='flex flex-row space-x-1'>
+                    <div class='flex flex-row -space-x-1 pt-2 pl-2 '>
+                        <!-- <HeartIcon class='h-4 w-4 text-red-500' /> -->
+                        <hero-icon name="heart" hostDisplay="inlineBlock" type="outline" class="h-4 w-4 text-red-500"></hero-icon>
+                        <!-- <ThumbUpIcon class='h-4 w-4 text-blue-600' /> -->
+                        <hero-icon name="thumb-up" hostDisplay="inlineBlock" type="outline" class="h-4 w-4 text-blue-600"></hero-icon>
+                        <hero-icon name="light-bulb" hostDisplay="inlineBlock" type="outline" class="h-4 w-4 text-yellow-600"></hero-icon>
+                        <!-- <LightBulbIcon class='h-4 w-4 text-yellow-600' /> -->
+                    </div>
+                    <!-- {post?.like?.length ?
+                        <p class='text-xs text-gray-500 mt-2 hover:text-blue-500 hover:underline transition-all duration-200 cursor-pointer'>{`${post?.like[0]?.name}` + `${post.like.length > 1 ? ` and ${post.like.length - 1} others` : ''} like this`} </p> : <p />
+                    } -->
+                    <div *ngIf="post.like.length">
+                        <p class='text-xs text-gray-500 mt-2 hover:text-blue-500 hover:underline transition-all duration-200 cursor-pointer'>{{post.like[0].name + (post.like.length > 1 ?  ' and '+ (post.like.length - 1) +' others' : '') +" like this"}} </p> 
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class='flex flex-row space-x-2'>
+                    <!-- {
+                        comments.length ?
+                            <p class='text-xs text-gray-500 mt-2 hover:text-blue-500 hover:underline transition-all duration-200 cursor-pointer' >{`${comments.length}comments`} </p> : <p />
+                    } -->
+                    <div *ngIf="comments.length">
+                        <p class='text-xs text-gray-500 mt-2 hover:text-blue-500 hover:underline transition-all duration-200 cursor-pointer' >{{comments.length+"Comment"}} </p> 
+                    </div>
+                    <p class='text-gray-500 -mt-0.5'>.</p>
+                    <p class='text-xs text-gray-500 mt-2 pr-2 hover:text-blue-500 hover:underline transition-all duration-200 cursor-pointer'>70 share</p>
+                </div>
+            </div>
+
+
+            <div class='flex flex-row flex-start justify-between p-6 text-gray-500 '>
+                <div class='flex flex-row space-x-1 hover:bg-gray-200 transition-all duration-200 cursor-pointer'>
+                    <img src='https://avatars.githubusercontent.com/u/46999893?v=4' alt='dp' class='h-6 w-6 rounded-full flex-start' />
+                    <!-- <ChevronDownIcon class='h-4 w-4 mt-1 text-gray-500' /> -->
+                    <hero-icon name="chevron-down" hostDisplay="inlineBlock" type="outline" class="h-4 w-4 mt-1 text-gray-500"></hero-icon>
+                </div>
+                <div class="flex flex-row space-x-0 hover:bg-gray-200 transition-all duration-200 cursor-pointer" >
+                    <!-- <ThumbUpIcon class={`${liked ? 'text-blue-500' : ''} h-6 w-6 mr-3`} /> -->
+                    <hero-icon name="thumb-up" hostDisplay="inlineBlock" type="outline" class="w-6 h-6"></hero-icon>
+                    <p>Like</p>
+                </div>
+                <div class='flex flex-row space-x-0 hover:bg-gray-200 transition-all duration-200 cursor-pointer' (click)="toggleShowComment()" >
+                    <!-- <ChatAlt2Icon class=' h-6 w-6 mr-3' /> -->
+                    <hero-icon name="chat-alt-2" hostDisplay="inlineBlock" type="outline" class="h-6 w-6 mr-3"></hero-icon>
+                    <p>Comment</p>
+                </div>
+                <div class='flex flex-row space-x-0 hover:bg-gray-200 transition-all duration-200 cursor-pointer'>
+                    <!-- <ShareIcon class=' h-6 w-6 mr-3' /> -->
+                    <hero-icon name="share" hostDisplay="inlineBlock" type="outline" class="h-6 w-6 mr-3"></hero-icon>
+                    <p>Share</p>
+                </div>
+                <div class='flex flex-row space-x-0  hover:bg-gray-200 transition-all duration-200 cursor-pointer'>
+                    <!-- <ArrowRightIcon class=' h-6 w-6 mr-3' /> -->
+                    <hero-icon name="arrow-right" hostDisplay="inlineBlock" type="outline" class="h-6 w-6 mr-3"></hero-icon>
+                    <p>Send</p>
+                </div>
+            </div>
+
+            <!-- <Comment postId={post._id} showComment={showComment} comments={comments} setComments={setComments} /> -->
+            <div *ngIf="setShowComment">
+
+                <app-comment></app-comment>
+            </div>
+            <!-- {/* {setShowComment(false)} */} -->
+</div>
+
+
